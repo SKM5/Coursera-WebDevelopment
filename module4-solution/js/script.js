@@ -50,4 +50,4 @@ WARNING!!! WARNING!!!
     }
   }
 
-})(window);
+} )(window);
