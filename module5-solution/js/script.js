@@ -92,7 +92,7 @@ $ajaxUtils.sendGetRequest(
 // Builds HTML for the home page based on categories array
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
-
+   this.categories = categories;
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -116,12 +116,11 @@ function buildAndShowHomeHTML (categories) {
       // Hint: you need to surround the chosen category short name with something before inserting
       // it into the home html snippet.
       //
-      var finalHtml = homeHtmlUrl;
+      var str = "<a href="#" onclick="$dc.loadMenuItems({{randomCategoryShortName}});">";
       var short_name = "'" + chosenCategoryShortName + "'";
 
-      html = insertProperty(finalHtml, "randomCategoryShortName", short_name);
-      var homeHtmlToInsertIntoMainPage = finalHtml + html;
-
+      var html = insertProperty(str, "randomCategoryShortName", short_name);
+      var homeHtmlToInsertIntoMainPage = buildAndShowCategoriesHTML(categories);
 
       // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
