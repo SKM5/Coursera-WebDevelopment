@@ -119,8 +119,8 @@ function buildAndShowHomeHTML (categories) {
       //var str = "<a href="#" onclick="$dc.loadMenuItems({{randomCategoryShortName}});">";
       var short_name = "'" + chosenCategoryShortName + "'";
 
-      var html = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
-      var homeHtmlToInsertIntoMainPage = buildAndShowCategoriesHTML(categories);
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
+      
 
       // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
