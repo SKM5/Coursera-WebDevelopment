@@ -108,8 +108,8 @@ function buildAndShowHomeHTML (categories) {
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
-      var randomCategoryObj = chooseRandomCategory(categories);
-      var chosenCategoryShortName = randomCategoryObj.short_name;
+      //var randomCategoryObj = chooseRandomCategory(categories);
+      //var chosenCategoryShortName = randomCategoryObj.short_name;
 
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
@@ -124,13 +124,13 @@ function buildAndShowHomeHTML (categories) {
       // it into the home html snippet.
       //
       //var str = "<a href="#" onclick="$dc.loadMenuItems({{randomCategoryShortName}});">";
-      var short_name = "'" + chosenCategoryShortName + "'";
+      //var short_name = "'" + chosenCategoryShortName + "'";
 
       //var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
       
-      var attr = document.querySelector("#specials-tile").attr;
-      attr = attr.replace(new RegExp("{{randomCategoryShortName}}", "g"), short_name);
-      document.querySelector("#specials-tile").attr = attr;
+      //var attr = document.querySelector("#specials-tile").attr;
+      //attr = attr.replace(new RegExp("{{randomCategoryShortName}}", "g"), short_name);
+      //document.querySelector("#specials-tile").attr = attr;
 
       // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
