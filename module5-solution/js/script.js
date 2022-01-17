@@ -80,11 +80,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // *** start ***
 // On first load, show home view
-showLoading("#main-content");
+/*showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
   buildAndShowHomeHTML,// ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
+});*/
+showLoading("#main-content");
+$ajaxUtils.sendGetRequest(
+  homeHtml,
+  function (responseText) {
+    document.querySelector("#main-content")
+      .innerHTML = responseText;
+  },
+  false);
 });
 // *** finish **
 
@@ -98,18 +107,12 @@ function buildAndShowHomeHTML (categories) {
     homeHtmlUrl,
     function (homeHtml) {
 
-      $ajaxUtils.sendGetRequest(
-        homeHtml,
-        function (responseText) {
-          document.querySelector("#main-content")
-            .innerHTML = responseText;
-        },
-        false);
+
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
-      //var randomCategoryObj = chooseRandomCategory(categories);
-      //var chosenCategoryShortName = randomCategoryObj.short_name;
+      var randomCategoryObj = chooseRandomCategory(categories);
+      var chosenCategoryShortName = randomCategoryObj.short_name;
 
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
@@ -124,9 +127,9 @@ function buildAndShowHomeHTML (categories) {
       // it into the home html snippet.
       //
       //var str = "<a href="#" onclick="$dc.loadMenuItems({{randomCategoryShortName}});">";
-      //var short_name = "'" + chosenCategoryShortName + "'";
+      var short_name = "'" + chosenCategoryShortName + "'";
 
-      //var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
       
       //var attr = document.querySelector("#specials-tile").attr;
       //attr = attr.replace(new RegExp("{{randomCategoryShortName}}", "g"), short_name);
@@ -136,7 +139,7 @@ function buildAndShowHomeHTML (categories) {
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
       
-      //insertHtml("#main-content", homeHtmlToInsertIntoMainPage); 
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage); 
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
