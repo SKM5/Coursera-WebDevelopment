@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML,
 // so it can be called when server responds with the categories data.
 
-// *** start ***
+// *** start ***Clear browsing data
 // On first load, show home view
 /*showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
@@ -88,7 +88,7 @@ $ajaxUtils.sendGetRequest(
 });*/
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
-  homeHtml,
+  homeHtmlUrl,
   function (responseText) {
     document.querySelector("#main-content")
       .innerHTML = responseText;
