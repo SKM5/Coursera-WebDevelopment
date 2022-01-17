@@ -95,7 +95,7 @@ $ajaxUtils.sendGetRequest(
   },
   false);
 });
-// *** finish **
+/// *** finish **
 
 
 // Builds HTML for the home page based on categories array
