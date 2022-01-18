@@ -99,7 +99,7 @@ function buildAndShowHomeHTML (categories) {
     function (homeHtml) {
 
       $ajaxUtils.sendGetRequest(
-        menuItemHtml,
+        allCategoriesUrl,
         function (categories) {
 
           // Choose random category
@@ -108,14 +108,18 @@ function buildAndShowHomeHTML (categories) {
 
           var short_name = "'" + chosenCategoryShortName + "'";
 
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
+          //var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
           
-          return homeHtmlToInsertIntoMainPage;
-          //insertHtml("#main-content", homeHtml);
+          // Insert category values
+          var homeHtmlToInsertIntoMainPage = homeHtmlUrl;            
+                        
+          homeHtmlToInsertIntoMainPage = insertProperty(html,"short_name", short_name);
+                    
+          //insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
         false);
       document.querySelector("#main-content")
-      .innerHTML = JSON.stringify(homeHtml);
+      .innerHTML = homeHtml;
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
