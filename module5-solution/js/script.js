@@ -83,11 +83,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  function (responseText) {
-    buildAndShowHomeHTML,
-    document.querySelector("#main-content")
-      .innerHTML = responseText;
-  }, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
@@ -114,11 +110,11 @@ function buildAndShowHomeHTML (categories) {
 
          
           // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlToInsertIntoMainPage,"short_name", short_name);
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"short_name", short_name);
                     
-           insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
-        false);     
+        false);   
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
