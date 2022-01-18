@@ -84,8 +84,11 @@ showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
   function (responseText) {
+    $ajaxUtils.sendGetRequest(
+    homeHtmlUrl,
+    buildAndShowHomeHTML),
     document.querySelector("#main-content")
-      .innerHTML = buildAndShowHomeHTML;
+      .innerHTML = responseText;
   }, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
 });
@@ -115,12 +118,11 @@ function buildAndShowHomeHTML (categories) {
           // Insert category values
           var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
                     
-          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);          
+          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
         false);   
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
-  
 }
 
 
