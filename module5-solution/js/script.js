@@ -112,6 +112,7 @@ function buildAndShowHomeHTML (categories) {
            // buildHomeViewHtml(chosenCategoryShortName);
           //insertHtml("#main-content", menuItemsViewHtml);
           homeHtml = homeHtmlToInsertIntoMainPage;
+          insertHtml("#main-content", homeHtml);
         },
         false);
       document.querySelector("#main-content")
