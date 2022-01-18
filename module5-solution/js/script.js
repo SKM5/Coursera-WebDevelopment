@@ -120,9 +120,10 @@ function buildAndShowHomeHTML (categories) {
       var finalHtml = homeHtmlUrl;
       finalHtml += "<section class='row'>";
       var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
+      
       finalHtml += homeHtmlToInsertIntoMainPage;
-
-
+      finalHtml += "</section>";
+      
       // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
