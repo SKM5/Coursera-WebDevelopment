@@ -114,7 +114,7 @@ function buildAndShowHomeHTML (categories) {
           homeHtml = homeHtmlToInsertIntoMainPage;
           insertHtml("#main-content", homeHtml);
         },
-        false);
+        true);
       document.querySelector("#main-content")
       .innerHTML = homeHtml;
     },
