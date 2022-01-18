@@ -109,14 +109,13 @@ function buildAndShowHomeHTML (categories) {
           var short_name = "'" + chosenCategoryShortName + "'";
 
           var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
-           // buildHomeViewHtml(chosenCategoryShortName);
-          //insertHtml("#main-content", menuItemsViewHtml);
-          homeHtml = homeHtmlToInsertIntoMainPage;
-          insertHtml("#main-content", homeHtml);
+          
+          return homeHtmlToInsertIntoMainPage;
+          //insertHtml("#main-content", homeHtml);
         },
-        true);
+        false);
       document.querySelector("#main-content")
-      .innerHTML = homeHtml;
+      .innerHTML = JSON.stringify(homeHtml);
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
