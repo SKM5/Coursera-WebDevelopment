@@ -78,24 +78,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML,
 // so it can be called when server responds with the categories data.
 
-// *** start ***Clear browsing data
+// *** start ***
 // On first load, show home view
-/*showLoading("#main-content");
+showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
   buildAndShowHomeHTML,// ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
-});*/
-showLoading("#main-content");
-$ajaxUtils.sendGetRequest(
-  homeHtmlUrl,
-  function (responseText) {
-    document.querySelector("#main-content")
-      .innerHTML = responseText;
-  },
-  false);
 });
-/// *** finish **
+// *** finish **
 
 
 // Builds HTML for the home page based on categories array
@@ -129,8 +120,10 @@ function buildAndShowHomeHTML (categories) {
       //var str = "<a href="#" onclick="$dc.loadMenuItems({{randomCategoryShortName}});">";
       var short_name = "'" + chosenCategoryShortName + "'";
 
+      var finalHtml = homeHtmlUrl;
+      finalHtml += "<section class='row'>";
       var homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlUrl, "randomCategoryShortName", short_name);
-      
+      finalHtml += homeHtmlToInsertIntoMainPage;
       //var attr = document.querySelector("#specials-tile").attr;
       //attr = attr.replace(new RegExp("{{randomCategoryShortName}}", "g"), short_name);
       //document.querySelector("#specials-tile").attr = attr;
@@ -138,8 +131,8 @@ function buildAndShowHomeHTML (categories) {
       // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
-      
-      insertHtml("#main-content", homeHtmlToInsertIntoMainPage); 
+
+      insertHtml("#main-content", finalHtml);      
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
@@ -192,7 +185,8 @@ function buildAndShowCategoriesHTML (categories) {
             buildCategoriesViewHtml(categories,
                                     categoriesTitleHtml,
                                     categoryHtml);
-          insertHtml("#main-content", categoriesViewHtml);
+          
+          ("#main-content", categoriesViewHtml);
         },
         false);
     },
