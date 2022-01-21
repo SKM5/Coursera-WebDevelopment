@@ -93,37 +93,41 @@ $ajaxUtils.sendGetRequest(
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
 
- //this.categories = categories;
- var arrCategories = categories;
- console.log(arrCategories.length);
- console.log(arrCategories[0].short_name);
-
+  var arrCategories = categories;
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
 
-      $ajaxUtils.sendGetRequest(
-        allCategoriesUrl,
-        function (categories) {
+      // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
+      // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
+      // variable's name implies it expects.
+       var categoryObj = chooseRandomCategory(arrCategories);
+       var chosenCategoryShortName = categoryObj.short_name;
 
-          // Choose random category
-          var categoryObj = chooseRandomCategory(arrCategories);
-          var chosenCategoryShortName = categoryObj.short_name;
 
-          var short_name = "'" + chosenCategoryShortName + "'";
-          
-          console.log(short_name);
+      // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
+      // chosen category from STEP 2. Use existing insertProperty function for that purpose.
+      // Look through this code for an example of how to do use the insertProperty function.
+      // WARNING! You are inserting something that will have to result in a valid Javascript
+      // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
+      // being passed into the $dc.loadMenuItems function. Think about what that argument needs
+      // to look like. For example, a valid call would look something like this:
+      // $dc.loadMenuItems('L')
+      // Hint: you need to surround the chosen category short name with something before inserting
+      // it into the home html snippet.
+      
+       var short_name = "'" + chosenCategoryShortName + "'";
+       var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
 
-          // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
-                    
-          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
-        },
-        false);   
+
+      // TODO: STEP 4: Insert the produced HTML in STEP 3 into the main page
+      // Use the existing insertHtml function for that purpose. Look through this code for an example
+      // of how to do that.
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
-    
 }
 
 
@@ -131,30 +135,11 @@ function buildAndShowHomeHTML (categories) {
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
- 
+
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
 
-function buildRandomCategoriesViewHtml(categories,
-                                          homeHtml,
-                                          categoryHtml) {
-    console.log(categories.length);
-
-   // Select random category object
-   var categoryObj = chooseRandomCategory(categories);
- 
-    // Insert category values
-       
-    var short_name = "'" + categoryObj.short_name + "'";
-  
-    console.log(short_name);
-    var html =
-      insertProperty(homeHtml,
-                     "randomCategoryShortName",
-                     short_name);
-    return html;
-}
 
 // Load the menu categories view
 dc.loadMenuCategories = function () {
@@ -209,14 +194,13 @@ function buildCategoriesViewHtml(categories,
 
   var finalHtml = categoriesTitleHtml;
   finalHtml += "<section class='row'>";
-  console.log(categories.length);
+
   // Loop over categories
   for (var i = 0; i < categories.length; i++) {
     // Insert category values
     var html = categoryHtml;
     var name = "" + categories[i].name;
     var short_name = categories[i].short_name;
-    console.log(short_name);
     html =
       insertProperty(html, "name", name);
     html =
