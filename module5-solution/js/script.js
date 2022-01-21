@@ -111,7 +111,7 @@ function buildAndShowHomeHTML (categories) {
 
                 var homeHtmlToInsertIntoMainPage =
                   buildRandomCategoriesViewHtml(categories,
-                                          categoriesTitleHtml,
+                                          homeHtml,
                                           categoryHtml);
                 insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
               },
@@ -134,17 +134,16 @@ function chooseRandomCategory (categories) {
 }
 
 function buildRandomCategoriesViewHtml(categories,
-                                          categoriesTitleHtml,
+                                          homeHtml,
                                           categoryHtml) {
-  var finalHtml = categoriesTitleHtml;
-  finalHtml += "<section class='row'>";
+  
   console.log(categories.length);
 
    // Select random category object
    var categoryObj = chooseRandomCategory(categories);
  
     // Insert category values
-    var html = categoryHtml;
+    var html = homeHtml;
     var name = "" + categoryObj.name;
     var short_name = "'" + categoryObj.short_name + "'";
     console.log(short_name);
@@ -153,11 +152,8 @@ function buildRandomCategoriesViewHtml(categories,
     html =
       insertProperty(html,
                      "randomCategoryShortName",
-                     short_name);
-    finalHtml += html; 
-
-  finalHtml += "</section>";
-  return finalHtml;  
+                     short_name);    
+  return html;  
 }
 
 // Load the menu categories view
