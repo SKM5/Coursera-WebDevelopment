@@ -109,8 +109,8 @@ function buildAndShowHomeHTML (categories) {
 
           var short_name = "'" + chosenCategoryShortName + "'";
           short_name ="'DK'";
-          console.log(short_name);
-          console.log(categoryObj.name);
+          //console.log(short_name);
+          //console.log(categoryObj.name);
           // Insert category values
           var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
                     
@@ -127,8 +127,8 @@ function buildAndShowHomeHTML (categories) {
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
-  console.log(categories.length);
-  console.log(randomArrayIndex);
+  //console.log(categories.length);
+  //console.log(randomArrayIndex);
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
@@ -187,7 +187,7 @@ function buildCategoriesViewHtml(categories,
 
   var finalHtml = categoriesTitleHtml;
   finalHtml += "<section class='row'>";
-
+  console.log(categories.length);
   // Loop over categories
   for (var i = 0; i < categories.length; i++) {
     // Insert category values
