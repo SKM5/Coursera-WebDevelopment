@@ -136,24 +136,21 @@ function chooseRandomCategory (categories) {
 function buildRandomCategoriesViewHtml(categories,
                                           homeHtml,
                                           categoryHtml) {
-  
-  console.log(categories.length);
+    console.log(categories.length);
 
    // Select random category object
    var categoryObj = chooseRandomCategory(categories);
  
     // Insert category values
-    var html = homeHtml;
-    var name = "" + categoryObj.name;
+       
     var short_name = "'" + categoryObj.short_name + "'";
+  
     console.log(short_name);
-    html =
-      insertProperty(html, "name", name);
-    html =
-      insertProperty(html,
+    var html =
+      insertProperty(homeHtml,
                      "randomCategoryShortName",
-                     short_name);    
-  return html;  
+                     short_name);
+    return html;
 }
 
 // Load the menu categories view
