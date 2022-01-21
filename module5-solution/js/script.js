@@ -114,7 +114,7 @@ var categoryObj;
           
           console.log(short_name);
           console.log(categoryObj.name);
-          
+
           // Insert category values
           var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'L'");
                     
@@ -131,7 +131,7 @@ var categoryObj;
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
-
+  console.log(categories.length);
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
