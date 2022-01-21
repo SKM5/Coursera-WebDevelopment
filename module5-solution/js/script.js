@@ -102,19 +102,20 @@ function buildAndShowHomeHTML (categories) {
       $ajaxUtils.sendGetRequest(
         allCategoriesUrl,
         function (categories) {
-          
-          // Choose random category
-          var categoryObj = chooseRandomCategory(categories);
-          var chosenCategoryShortName = categoryObj.short_name;
+            // Retrieve single category snippet
+            $ajaxUtils.sendGetRequest(
+              categoryHtml,
+              function (categoryHtml) {
+                // Switch CSS class active to menu button
+                switchMenuToActive();
 
-          var short_name = "'" + chosenCategoryShortName + "'";
-          short_name ="'DK'";
-          //console.log(short_name);
-          //console.log(categoryObj.name);
-          // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
-                    
-          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+                var homeHtmlToInsertIntoMainPage =
+                  buildRandomCategoriesViewHtml(categories,
+                                          categoriesTitleHtml,
+                                          categoryHtml);
+                insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+              },
+              false);
         },
         false);   
     },
@@ -127,12 +128,37 @@ function buildAndShowHomeHTML (categories) {
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
-  //console.log(categories.length);
-  //console.log(randomArrayIndex);
+ 
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
 
+function buildRandomCategoriesViewHtml(categories,
+                                          categoriesTitleHtml,
+                                          categoryHtml) {
+  var finalHtml = categoriesTitleHtml;
+  finalHtml += "<section class='row'>";
+  console.log(categories.length);
+
+   // Select random category object
+   var categoryObj = chooseRandomCategory(categories);
+ 
+    // Insert category values
+    var html = categoryHtml;
+    var name = "" + categoryObj.name;
+    var short_name = "'" + categoryObj.short_name + "'";
+    console.log(short_name);
+    html =
+      insertProperty(html, "name", name);
+    html =
+      insertProperty(html,
+                     "randomCategoryShortName",
+                     short_name);
+    finalHtml += html; 
+
+  finalHtml += "</section>";
+  return finalHtml;  
+}
 
 // Load the menu categories view
 dc.loadMenuCategories = function () {
