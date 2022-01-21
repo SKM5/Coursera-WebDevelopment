@@ -83,9 +83,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  function (responseText) {
-    buildAndShowHomeHTML(responseText.categories);    
-  }, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
@@ -108,7 +106,8 @@ function buildAndShowHomeHTML (categories) {
           var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
 
           var short_name = "'" + chosenCategoryShortName + "'";
-
+          
+          console.log(short_name);
          
           // Insert category values
           var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
