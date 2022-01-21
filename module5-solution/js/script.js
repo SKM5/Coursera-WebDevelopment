@@ -93,10 +93,7 @@ $ajaxUtils.sendGetRequest(
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
 
-var chosenCategoryShortName;
-var short_name;
-var categoryObj;
-
+console.log(categories[0].short_name);
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -105,34 +102,19 @@ var categoryObj;
       $ajaxUtils.sendGetRequest(
         allCategoriesUrl,
         function (categories) {
+          
+          // Choose random category
+          var categoryObj = chooseRandomCategory(categories);
+          var chosenCategoryShortName = categoryObj.short_name;
 
-            $ajaxUtils.sendGetRequest(
-              categoriesTitleHtml,
-              function (categoriesTitleHtml) {
-                // Retrieve single category snippet
-                $ajaxUtils.sendGetRequest(
-                  categoryHtml,
-                  function (categoryHtml) {
-                    // Switch CSS class active to menu button
-                    switchMenuToActive();
-
-                    // Choose random category
-                    categoryObj = chooseRandomCategory(categories);
-                    chosenCategoryShortName = categoryObj.short_name;
-
-                    short_name = "'" + chosenCategoryShortName + "'";
-                    console.log(categories[0].categories);
-                    console.log(short_name);
-                    console.log(categoryObj.name);
-
-                    // Insert category values
-                    var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'L'");
-                              
-                    insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
-                  },
-                  false);
-              },
-              false);          
+          var short_name = "'" + chosenCategoryShortName + "'";
+          
+          console.log(short_name);
+          console.log(categoryObj.name);
+          // Insert category values
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'VG'");
+                    
+          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
         false);   
     },
@@ -145,7 +127,7 @@ var categoryObj;
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
-  console.log(categories.length)
+
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
