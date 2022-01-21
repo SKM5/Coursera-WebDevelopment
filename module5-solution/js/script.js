@@ -107,13 +107,14 @@ var categoryObj;
         function (categories) {
 
           // Choose random category
-          categoryObj = chooseRandomCategory(categories)
-          chosenCategoryShortName = chooseRandomCategory(categories).short_name;
+          categoryObj = chooseRandomCategory(categories);
+          chosenCategoryShortName = categoryObj.short_name;
 
           short_name = "'" + chosenCategoryShortName + "'";
           
           console.log(short_name);
-         console.log(chooseRandomCategory(categories).name)
+          console.log(categoryObj.name);
+          
           // Insert category values
           var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'L'");
                     
