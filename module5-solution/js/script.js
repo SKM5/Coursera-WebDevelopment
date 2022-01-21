@@ -93,7 +93,11 @@ $ajaxUtils.sendGetRequest(
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
 
- this.categories = categories;
+ //this.categories = categories;
+ var arrCategories = categories;
+ console.log(arrCategories.length);
+ console.log(arrCategories[0].short_name);
+
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -102,20 +106,19 @@ function buildAndShowHomeHTML (categories) {
       $ajaxUtils.sendGetRequest(
         allCategoriesUrl,
         function (categories) {
-            // Retrieve single category snippet
-            $ajaxUtils.sendGetRequest(
-              categoryHtml,
-              function (categoryHtml) {
-                // Switch CSS class active to menu button
-                switchMenuToActive();
 
-                var homeHtmlToInsertIntoMainPage =
-                  buildRandomCategoriesViewHtml(categories,
-                                          homeHtml,
-                                          categoryHtml);
-                insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
-              },
-              false);
+          // Choose random category
+          var categoryObj = chooseRandomCategory(arrCategories);
+          var chosenCategoryShortName = categoryObj.short_name;
+
+          var short_name = "'" + chosenCategoryShortName + "'";
+          
+          console.log(short_name);
+
+          // Insert category values
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
+                    
+          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
         false);   
     },
