@@ -106,25 +106,38 @@ var categoryObj;
         allCategoriesUrl,
         function (categories) {
 
-          // Choose random category
-          categoryObj = chooseRandomCategory(categories);
-          chosenCategoryShortName = categoryObj.short_name;
+            $ajaxUtils.sendGetRequest(
+              categoriesTitleHtml,
+              function (categoriesTitleHtml) {
+                // Retrieve single category snippet
+                $ajaxUtils.sendGetRequest(
+                  categoryHtml,
+                  function (categoryHtml) {
+                    // Switch CSS class active to menu button
+                    switchMenuToActive();
 
-          short_name = "'" + chosenCategoryShortName + "'";
-          console.log(categories[0].categories);
-          console.log(short_name);
-          console.log(categoryObj.name);
+                    // Choose random category
+                    categoryObj = chooseRandomCategory(categories);
+                    chosenCategoryShortName = categoryObj.short_name;
 
-          // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'L'");
-                    
-          insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+                    short_name = "'" + chosenCategoryShortName + "'";
+                    console.log(categories[0].categories);
+                    console.log(short_name);
+                    console.log(categoryObj.name);
+
+                    // Insert category values
+                    var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'L'");
+                              
+                    insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
+                  },
+                  false);
+              },
+              false);          
         },
         false);   
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
     
-    return homeHtml;
 }
 
 
