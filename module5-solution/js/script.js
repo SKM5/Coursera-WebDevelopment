@@ -108,11 +108,11 @@ console.log(categories[0].short_name);
           var chosenCategoryShortName = categoryObj.short_name;
 
           var short_name = "'" + chosenCategoryShortName + "'";
-          
+          short_name ="'DK'";
           console.log(short_name);
           console.log(categoryObj.name);
           // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'VG'");
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", short_name);
                     
           insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
