@@ -112,7 +112,7 @@ var chosenCategoryShortName, short_name;
           console.log(short_name);
          
           // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", 'L');
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'L'");
                     
           insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
