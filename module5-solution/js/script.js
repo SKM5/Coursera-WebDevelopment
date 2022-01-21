@@ -93,7 +93,7 @@ $ajaxUtils.sendGetRequest(
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
 
-console.log(categories[0].short_name);
+ this.categories = categories;
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -127,7 +127,8 @@ console.log(categories[0].short_name);
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
-
+  console.log(categories.length);
+  console.log(randomArrayIndex);
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
