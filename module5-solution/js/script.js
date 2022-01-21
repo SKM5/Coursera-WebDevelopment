@@ -83,9 +83,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  function (categories) {
-    buildAndShowHomeHTML(categories);
-  }, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitly setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
@@ -113,7 +111,7 @@ var categoryObj;
           chosenCategoryShortName = categoryObj.short_name;
 
           short_name = "'" + chosenCategoryShortName + "'";
-          
+          console.log(categories[0].categories);
           console.log(short_name);
           console.log(categoryObj.name);
 
@@ -126,6 +124,7 @@ var categoryObj;
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
     
+    return homeHtml;
 }
 
 
@@ -133,7 +132,7 @@ var categoryObj;
 function chooseRandomCategory (categories) {
   // Choose a random index into the array (from 0 inclusively until array length (exclusively))
   var randomArrayIndex = Math.floor(Math.random() * categories.length);
-  console.log(categories.length);
+  console.log(categories.length)
   // return category object with that randomArrayIndex
   return categories[randomArrayIndex];
 }
