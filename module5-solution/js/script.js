@@ -93,6 +93,8 @@ $ajaxUtils.sendGetRequest(
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
 
+var chosenCategoryShortName, short_name;
+
   // Load home snippet page
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
@@ -103,14 +105,14 @@ function buildAndShowHomeHTML (categories) {
         function (categories) {
 
           // Choose random category
-          var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
+          chosenCategoryShortName = chooseRandomCategory(categories).short_name;
 
-          //var short_name = "'" + chosenCategoryShortName + "'";
+          short_name = "'" + chosenCategoryShortName + "'";
           
-          console.log("'" + chosenCategoryShortName + "'");
+          console.log(short_name);
          
           // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", "'" + chosenCategoryShortName + "'");
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", 'SP');
                     
           insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
