@@ -105,14 +105,14 @@ var chosenCategoryShortName, short_name;
         function (categories) {
 
           // Choose random category
-          chosenCategoryShortName = chooseRandomCategory(categories).short_name;
+          chosenCategoryShortName = chooseRandomCategory(categories.data).short_name;
 
           short_name = "'" + chosenCategoryShortName + "'";
           
           console.log(short_name);
          
           // Insert category values
-          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", 'SP');
+          var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,"randomCategoryShortName", 'L');
                     
           insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
         },
